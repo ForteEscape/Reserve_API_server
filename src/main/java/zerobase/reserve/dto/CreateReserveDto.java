@@ -24,6 +24,16 @@ public class CreateReserveDto {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
+    public static class StoreRequest{
+
+        private String reserveTime;
+    }
+
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
     public static class Response{
 
         private Long id;

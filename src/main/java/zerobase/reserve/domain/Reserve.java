@@ -49,4 +49,8 @@ public class Reserve{
         this.member = member;
         this.store = store;
     }
+
+    public void changeReserveStatus(ReserveStatus reserveStatus){
+        this.reserveStatus = reserveStatus;
+    }
 }
