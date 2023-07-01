@@ -29,16 +29,14 @@ public class CreateMemberDto {
         private String phoneNumber;
         private String gender;
 
-        private List<String> roles;
-
-        public Member toEntity(){
+        public Member createMember(List<String> roles){
             return Member.builder()
                     .name(this.name)
+                    .password(this.password)
+                    .email(this.email)
                     .gender(this.gender)
                     .phoneNumber(this.phoneNumber)
-                    .email(this.email)
-                    .password(this.password)
-                    .roles(this.roles)
+                    .roles(roles)
                     .build();
         }
     }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import zerobase.reserve.domain.Member;
 import zerobase.reserve.domain.Reserve;
 import zerobase.reserve.dto.CreateMemberDto;
+import zerobase.reserve.dto.MemberDto;
 import zerobase.reserve.dto.ReserveDto;
 import zerobase.reserve.repository.ReserveRepository;
 import zerobase.reserve.security.TokenProvider;
@@ -27,11 +28,14 @@ public class MemberController {
     private final MemberService memberService;
     private final TokenProvider tokenProvider;
 
-    @PostMapping("/signup")
-    public ResponseEntity<?> signUp(@RequestBody CreateMemberDto.SignUp request){
-        Member member = memberService.createMember(request);
+    @PostMapping("/owner/signup")
+    public MemberDto signUpOwner(@RequestBody CreateMemberDto.SignUp request){
+        return memberService.createPartnerMember(request);
+    }
 
-        return ResponseEntity.ok(member);
+    @PostMapping("/user/signup")
+    public MemberDto signUpUser(@RequestBody CreateMemberDto.SignUp request){
+        return memberService.createUserMember(request);
     }
 
     @PostMapping("/signin")
