@@ -26,8 +26,6 @@ public class MemberController {
 
     private final MemberService memberService;
     private final TokenProvider tokenProvider;
-    private final ReserveRepository reserveRepository;
-    private final ReserveService reserveService;
 
     @PostMapping("/signup")
     public ResponseEntity<?> signUp(@RequestBody CreateMemberDto.SignUp request){
@@ -42,25 +40,5 @@ public class MemberController {
         String token = tokenProvider.generateToken(member.getEmail(), member.getRoles());
 
         return ResponseEntity.ok(token);
-    }
-
-    @PreAuthorize("hasRole('PARTNER')")
-    @GetMapping("/owner/reserves")
-    public List<ReserveDto> getOwnerReserve(Principal principal){
-        List<Reserve> ownerReserveList = reserveRepository.findByStoreOwnerEmail(principal.getName());
-
-        return ownerReserveList.stream()
-                .map(ReserveDto::fromEntity)
-                .collect(Collectors.toList());
-    }
-
-    @PreAuthorize("hasRole('USER')")
-    @GetMapping("/user/reserves")
-    public List<ReserveDto> getUserReserve(Principal principal){
-        List<Reserve> userReserveList = reserveRepository.findByMemberEmail(principal.getName());
-
-        return userReserveList.stream()
-                .map(ReserveDto::fromEntity)
-                .collect(Collectors.toList());
     }
 }
