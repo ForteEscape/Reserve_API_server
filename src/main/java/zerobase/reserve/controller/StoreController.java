@@ -6,10 +6,12 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import zerobase.reserve.domain.Store;
 import zerobase.reserve.dto.CreateReserveDto;
+import zerobase.reserve.dto.CreateReviewDto;
 import zerobase.reserve.dto.CreateStoreDto;
 import zerobase.reserve.dto.StoreDto;
 import zerobase.reserve.exception.ErrorCode;
 import zerobase.reserve.exception.NotExistsException;
+import zerobase.reserve.repository.ReviewRepository;
 import zerobase.reserve.repository.StoreRepository;
 import zerobase.reserve.service.ReserveService;
 import zerobase.reserve.service.StoreService;
@@ -28,6 +30,7 @@ public class StoreController {
     private final StoreService storeService;
     private final StoreRepository storeRepository;
     private final ReserveService reserveService;
+    private final ReviewRepository reviewRepository;
 
     @GetMapping
     public List<StoreDto> getStoreList(){
@@ -62,5 +65,12 @@ public class StoreController {
             Principal principal
     ){
        return reserveService.createReserveFromStore(reserveInfo, storeId, principal.getName());
+    }
+
+    @GetMapping("/{storeId}/reviews")
+    public List<CreateReviewDto.Response> getStoreReview(@PathVariable("storeId") Long storeId){
+       return reviewRepository.findByStoreId(storeId).stream()
+                .map(CreateReviewDto.Response::fromEntity)
+                .collect(Collectors.toList());
     }
 }

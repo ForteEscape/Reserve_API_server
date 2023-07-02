@@ -29,9 +29,9 @@ public class ReviewRepository {
     }
 
     // 가계에 대한 리뷰 확인
-    public List<Review> findByStoreName(String storeName){
-        return em.createQuery("select r from Review r join Store s on s.storeName = :storeName", Review.class)
-                .setParameter("storeName", storeName)
+    public List<Review> findByStoreId(Long storeId){
+        return em.createQuery("select r from Review r join Store s on s.id = :storeId", Review.class)
+                .setParameter("storeId", storeId)
                 .getResultList();
     }
 
@@ -39,6 +39,12 @@ public class ReviewRepository {
     public List<Review> findByUserEmail(String userEmail){
         return em.createQuery("select r from Review r join Member m on m.email = :userEmail", Review.class)
                 .setParameter("userEmail", userEmail)
+                .getResultList();
+    }
+
+    public List<Review> findByOwnerEmail(String ownerEmail){
+        return em.createQuery("select r from Review r join r.store s on s.owner.email = :ownerEmail", Review.class)
+                .setParameter("ownerEmail", ownerEmail)
                 .getResultList();
     }
 }

@@ -18,6 +18,7 @@ public enum ErrorCode {
     REVIEW_NOT_EXISTS("해당 리뷰는 존재하지 않는 리뷰입니다."),
     RESERVE_NOT_COMPLETE("방문이 완료된 예약만 리뷰 생성이 가능합니다."),
     CANNOT_CREATE_REVIEW_FROM_REVIEW("예약한지 1주일 전까지만 리뷰를 작성할 수 있습니다."),
+    ALREADY_REVIEWED("이미 리뷰한 예약을 다시 리뷰할 수 없습니다."),
     ILLEGAL_ACCESS("잘못된 접근입니다.");
 
     private final String description;

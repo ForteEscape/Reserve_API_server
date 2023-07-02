@@ -18,6 +18,7 @@ import zerobase.reserve.repository.MemberRepository;
 import zerobase.reserve.repository.ReserveRepository;
 import zerobase.reserve.repository.StoreRepository;
 
+import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -209,7 +210,11 @@ public class ReserveService {
             throw new InvalidReserveException(ErrorCode.RESERVE_NO_LONGER_AVAILABLE);
         }
 
+        log.info("success to check in");
+
         reserve.changeReserveStatus(ReserveStatus.COMPLETE);
+
+        log.info("reserveStatus = {}", reserve.getReserveStatus());
 
         return ReserveDto.fromEntity(reserve);
     }

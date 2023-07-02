@@ -6,11 +6,13 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import zerobase.reserve.domain.Reserve;
 import zerobase.reserve.dto.CreateReserveDto;
+import zerobase.reserve.dto.CreateReviewDto;
 import zerobase.reserve.dto.ReserveDto;
 import zerobase.reserve.exception.ErrorCode;
 import zerobase.reserve.exception.NotExistsException;
 import zerobase.reserve.repository.ReserveRepository;
 import zerobase.reserve.service.ReserveService;
+import zerobase.reserve.service.ReviewService;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -25,6 +27,7 @@ public class ReserveController {
 
     private final ReserveRepository reserveRepository;
     private final ReserveService reserveService;
+    private final ReviewService reviewService;
 
     @PreAuthorize("hasRole('USER')")
     @PostMapping("/new")
@@ -99,5 +102,15 @@ public class ReserveController {
     @PostMapping("/user/{reserveId}/checkin")
     public ReserveDto checkinReserve(@PathVariable("reserveId") Long reserveId, Principal principal){
         return reserveService.arriveCheck(reserveId, principal.getName());
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @PostMapping("/user/{reserveId}/add-review")
+    public CreateReviewDto.Response createReview(
+            @PathVariable("reserveId") Long reserveId,
+            @RequestBody CreateReviewDto.Request request,
+            Principal principal
+    ){
+        return reviewService.createReview(request, reserveId, principal.getName());
     }
 }

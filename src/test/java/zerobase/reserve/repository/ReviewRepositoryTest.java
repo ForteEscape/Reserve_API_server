@@ -1,30 +1,19 @@
 package zerobase.reserve.repository;
 
 import lombok.extern.slf4j.Slf4j;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import zerobase.reserve.domain.*;
-import zerobase.reserve.dto.CreateMemberDto;
-import zerobase.reserve.dto.CreateReserveDto;
-import zerobase.reserve.dto.CreateStoreDto;
-import zerobase.reserve.dto.MemberDto;
 import zerobase.reserve.exception.ErrorCode;
 import zerobase.reserve.exception.NotExistsException;
-import zerobase.reserve.service.MemberService;
-import zerobase.reserve.service.ReserveService;
-import zerobase.reserve.service.StoreService;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Slf4j
@@ -175,7 +164,7 @@ class ReviewRepositoryTest {
         );
 
         // when
-        List<Review> result = reviewRepository.findByStoreName(store1.getStoreName());
+        List<Review> result = reviewRepository.findByStoreId(store1.getId());
 
         // then
         assertThat(result.size()).isEqualTo(3);
@@ -246,6 +235,85 @@ class ReviewRepositoryTest {
 
         // when
         List<Review> result = reviewRepository.findByUserEmail(userMember.getEmail());
+
+        // then
+        assertThat(result.size()).isEqualTo(3);
+        assertThat(result).containsExactly(review, review2, review3);
+    }
+
+    @Test
+    @DisplayName("점장이 가진 가계들에 대한 리뷰 조회")
+    void findByOwnerEmail(){
+        // given
+        Member ownerMember = memberRepository.save(
+                Member.builder()
+                        .name("kim")
+                        .email("sehun5515@naver.com")
+                        .password("1234")
+                        .gender(Gender.MALE)
+                        .roles(Arrays.asList("ROLE_PARTNER", "ROLE_USER"))
+                        .phoneNumber("010-0101-0101")
+                        .build()
+        );
+
+        Member userMember = memberRepository.save(
+                Member.builder()
+                        .name("lee")
+                        .email("sehun8631@naver.com")
+                        .password("1234")
+                        .gender(Gender.MALE)
+                        .roles(List.of("ROLE_USER"))
+                        .phoneNumber("010-0101-0102")
+                        .build()
+        );
+
+        Store store1 = storeRepository.save(
+                Store.builder()
+                        .storeName("참새정")
+                        .address(new Address("경상남도", "김해시", "삼계로", "12345"))
+                        .description("맛있는 밥집")
+                        .owner(ownerMember)
+                        .build()
+        );
+
+        Store store2 = storeRepository.save(
+                Store.builder()
+                        .storeName("까치정")
+                        .address(new Address("경상남도", "김해시", "삼계로", "12355"))
+                        .description("맛있는 술집")
+                        .owner(ownerMember)
+                        .build()
+        );
+
+        Review review = reviewRepository.save(
+                Review.builder()
+                        .rating(5)
+                        .store(store1)
+                        .member(userMember)
+                        .reviewContent("매우 맛있는 밥집입니다.")
+                        .build()
+        );
+
+        Review review2 = reviewRepository.save(
+                Review.builder()
+                        .rating(3)
+                        .store(store2)
+                        .member(userMember)
+                        .reviewContent("매우 맛있었지만 서비스가 조금 아쉬웠습니다.")
+                        .build()
+        );
+
+        Review review3 = reviewRepository.save(
+                Review.builder()
+                        .rating(4)
+                        .store(store1)
+                        .member(userMember)
+                        .reviewContent("괜찮은 밥집이었습니다.")
+                        .build()
+        );
+
+        // when
+        List<Review> result = reviewRepository.findByOwnerEmail(ownerMember.getEmail());
 
         // then
         assertThat(result.size()).isEqualTo(3);
