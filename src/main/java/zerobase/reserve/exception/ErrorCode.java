@@ -14,6 +14,7 @@ public enum ErrorCode {
     PASSWORD_NOT_MATCH("비밀번호가 일치하지 않습니다."),
     RESERVE_NO_LONGER_AVAILABLE("예약은 10분 전까지 도착해야 합니다. 다음에 다시 와주세요"),
     RESERVE_CANCELED("해당 예약은 취소된 예약입니다."),
+    FIELD_MUST_NOT_EMPTY("해당 부분은 필수적으로 기입해주셔야 합니다."),
     ILLEGAL_ACCESS("잘못된 접근입니다.");
 
     private final String description;

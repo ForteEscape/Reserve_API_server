@@ -12,6 +12,7 @@ import zerobase.reserve.exception.NotExistsException;
 import zerobase.reserve.repository.ReserveRepository;
 import zerobase.reserve.service.ReserveService;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,7 +29,7 @@ public class ReserveController {
     @PreAuthorize("hasRole('USER')")
     @PostMapping("/new")
     public CreateReserveDto.Response addReserve(
-            @RequestBody CreateReserveDto.Request request,
+            @Valid @RequestBody CreateReserveDto.Request request,
             Principal principal
     ){
         return reserveService.createReserve(request, principal.getName());

@@ -14,6 +14,7 @@ import zerobase.reserve.repository.StoreRepository;
 import zerobase.reserve.service.ReserveService;
 import zerobase.reserve.service.StoreService;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,7 +39,7 @@ public class StoreController {
     @PreAuthorize("hasRole('PARTNER')")
     @PostMapping("/new")
     public CreateStoreDto.Response createStore(
-            @RequestBody CreateStoreDto.Request request,
+            @Valid @RequestBody CreateStoreDto.Request request,
             Principal principal
     ){
         return storeService.createStore(request, principal.getName());
@@ -57,7 +58,7 @@ public class StoreController {
     @PostMapping("/{storeId}/add-reserve")
     public CreateReserveDto.Response addReserve(
             @PathVariable("storeId") Long storeId,
-            @RequestBody CreateReserveDto.StoreRequest reserveInfo,
+            @Valid @RequestBody CreateReserveDto.StoreRequest reserveInfo,
             Principal principal
     ){
        return reserveService.createReserveFromStore(reserveInfo, storeId, principal.getName());

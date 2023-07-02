@@ -4,6 +4,7 @@ import lombok.*;
 import zerobase.reserve.domain.Reserve;
 import zerobase.reserve.domain.ReserveStatus;
 
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
 public class CreateReserveDto {
@@ -15,7 +16,9 @@ public class CreateReserveDto {
     @Builder
     public static class Request{
 
+        @NotEmpty
         private String reserveTime;
+        @NotEmpty
         private String storeName;
     }
 
@@ -26,6 +29,7 @@ public class CreateReserveDto {
     @Builder
     public static class StoreRequest{
 
+        @NotEmpty
         private String reserveTime;
     }
 

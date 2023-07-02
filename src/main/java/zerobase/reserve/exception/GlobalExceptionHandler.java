@@ -1,6 +1,8 @@
 package zerobase.reserve.exception;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import zerobase.reserve.dto.ErrorResponseDto;
@@ -56,6 +58,25 @@ public class GlobalExceptionHandler {
         return ErrorResponseDto.builder()
                 .errorCode(e.getErrorCode())
                 .errorMessage(e.getErrorMessage())
+                .build();
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ErrorResponseDto handleMethodArgumentNotValidException(MethodArgumentNotValidException e){
+        log.error("validate error occurred");
+
+        BindingResult bindingResult = e.getBindingResult();
+
+        StringBuilder sb = new StringBuilder();
+
+        for (var error: bindingResult.getFieldErrors()){
+            sb.append(error.getField()).append(": ");
+            sb.append("해당 부분은 필수적으로 입력하셔야 합니다.").append(", ");
+        }
+
+        return ErrorResponseDto.builder()
+                .errorCode(ErrorCode.FIELD_MUST_NOT_EMPTY)
+                .errorMessage(sb.toString())
                 .build();
     }
 }

@@ -3,6 +3,8 @@ package zerobase.reserve.dto;
 import lombok.*;
 import zerobase.reserve.domain.Store;
 
+import javax.validation.constraints.NotEmpty;
+
 
 public class CreateStoreDto {
 
@@ -12,10 +14,16 @@ public class CreateStoreDto {
     @AllArgsConstructor
     @Builder
     public static class Request{
+
+        @NotEmpty
         private String storeName;
+        @NotEmpty
         private String legion;
+        @NotEmpty
         private String city;
+        @NotEmpty
         private String street;
+        @NotEmpty
         private String zipcode;
         private String description;
     }
