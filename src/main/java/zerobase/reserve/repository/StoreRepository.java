@@ -40,10 +40,4 @@ public class StoreRepository {
 
         return findByStoreName.stream().findAny();
     }
-
-    public List<Store> findByMemberId(Long memberId){
-        return em.createQuery("select s from Store s join s.owner m on m.id = :memberId", Store.class)
-                .setParameter("memberId", memberId)
-                .getResultList();
-    }
 }
