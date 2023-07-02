@@ -33,6 +33,7 @@ public class CreateReserveDto {
     @Setter
     @AllArgsConstructor
     @NoArgsConstructor
+    @EqualsAndHashCode
     @Builder
     public static class Response{
 
@@ -47,7 +48,7 @@ public class CreateReserveDto {
                     .id(reserve.getId())
                     .reserveDateTime(reserve.getReserveTime())
                     .reserveStatus(reserve.getReserveStatus())
-                    .memberEmail(reserve.getMember().getName())
+                    .memberEmail(reserve.getMember().getEmail())
                     .storeName(reserve.getStore().getStoreName())
                     .build();
         }

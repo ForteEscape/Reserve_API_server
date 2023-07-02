@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import zerobase.reserve.domain.Authority;
+import zerobase.reserve.domain.Gender;
 import zerobase.reserve.domain.Member;
 import zerobase.reserve.dto.CreateMemberDto;
 import zerobase.reserve.dto.MemberDto;
@@ -38,7 +39,7 @@ class MemberServiceTest {
                 .email("sehun5515@naver.com")
                 .password("1234")
                 .phoneNumber("010-8631-8187")
-                .gender("MALE")
+                .gender("Male")
                 .build();
 
         // when
@@ -48,7 +49,7 @@ class MemberServiceTest {
         assertThat(userMember.getEmail()).isEqualTo("sehun5515@naver.com");
         assertThat(userMember.getName()).isEqualTo("kim");
         assertThat(passwordEncoder.matches("1234", userMember.getPassword())).isTrue();
-        assertThat(userMember.getGender()).isEqualTo("MALE");
+        assertThat(userMember.getGender()).isEqualTo(Gender.MALE);
         assertThat(userMember.getRoles()).contains("ROLE_USER");
     }
 
@@ -61,7 +62,7 @@ class MemberServiceTest {
                 .email("sehun5515@naver.com")
                 .password("1234")
                 .phoneNumber("010-8631-8187")
-                .gender("MALE")
+                .gender("Male")
                 .build();
 
         CreateMemberDto.SignUp memberDto2 = CreateMemberDto.SignUp.builder()
@@ -69,7 +70,7 @@ class MemberServiceTest {
                 .email("sehun5515@naver.com")
                 .password("1234")
                 .phoneNumber("010-5213-8631")
-                .gender("FEMALE")
+                .gender("Female")
                 .build();
 
         // when
@@ -90,7 +91,7 @@ class MemberServiceTest {
                 .email("sehun5515@naver.com")
                 .password("1234")
                 .phoneNumber("010-8631-8187")
-                .gender("MALE")
+                .gender("Male")
                 .build();
 
         // when
@@ -100,7 +101,7 @@ class MemberServiceTest {
         assertThat(userMember.getEmail()).isEqualTo("sehun5515@naver.com");
         assertThat(userMember.getName()).isEqualTo("kim");
         assertThat(passwordEncoder.matches("1234", userMember.getPassword())).isTrue();
-        assertThat(userMember.getGender()).isEqualTo("MALE");
+        assertThat(userMember.getGender()).isEqualTo(Gender.MALE);
         assertThat(userMember.getRoles()).contains("ROLE_USER", "ROLE_PARTNER");
     }
 
@@ -113,7 +114,7 @@ class MemberServiceTest {
                 .email("sehun5515@naver.com")
                 .password("1234")
                 .phoneNumber("010-8631-8187")
-                .gender("MALE")
+                .gender("Male")
                 .build();
 
         CreateMemberDto.SignUp memberDto2 = CreateMemberDto.SignUp.builder()
@@ -121,7 +122,7 @@ class MemberServiceTest {
                 .email("sehun5515@naver.com")
                 .password("1234")
                 .phoneNumber("010-5213-8631")
-                .gender("FEMALE")
+                .gender("Female")
                 .build();
 
         // when

@@ -35,7 +35,7 @@ class ReserveRepositoryTest {
         Member owner = memberRepository.save(
                 Member.builder()
                         .name("kim")
-                        .gender(Gender.MALE.getDescription())
+                        .gender(Gender.MALE)
                         .phoneNumber("010-0101-0101")
                         .build()
         );
@@ -43,7 +43,7 @@ class ReserveRepositoryTest {
         Member member = memberRepository.save(
                 Member.builder()
                         .name("lee")
-                        .gender(Gender.MALE.getDescription())
+                        .gender(Gender.MALE)
                         .phoneNumber("010-0101-0102")
                         .build()
         );
@@ -80,7 +80,7 @@ class ReserveRepositoryTest {
         Member owner = memberRepository.save(
                 Member.builder()
                         .name("kim")
-                        .gender(Gender.MALE.getDescription())
+                        .gender(Gender.MALE)
                         .phoneNumber("010-0101-0101")
                         .build()
         );
@@ -88,7 +88,7 @@ class ReserveRepositoryTest {
         Member member = memberRepository.save(
                 Member.builder()
                         .name("lee")
-                        .gender(Gender.MALE.getDescription())
+                        .gender(Gender.MALE)
                         .phoneNumber("010-0101-0102")
                         .build()
         );
@@ -96,7 +96,7 @@ class ReserveRepositoryTest {
         Member member2 = memberRepository.save(
                 Member.builder()
                         .name("park")
-                        .gender(Gender.FEMALE.getDescription())
+                        .gender(Gender.FEMALE)
                         .phoneNumber("010-0101-0103")
                         .build()
         );
@@ -173,7 +173,7 @@ class ReserveRepositoryTest {
         Member owner = memberRepository.save(
                 Member.builder()
                         .name("kim")
-                        .gender(Gender.MALE.getDescription())
+                        .gender(Gender.MALE)
                         .phoneNumber("010-0101-0101")
                         .build()
         );
@@ -181,7 +181,7 @@ class ReserveRepositoryTest {
         Member member = memberRepository.save(
                 Member.builder()
                         .name("lee")
-                        .gender(Gender.MALE.getDescription())
+                        .gender(Gender.MALE)
                         .phoneNumber("010-0101-0102")
                         .build()
         );
@@ -189,7 +189,7 @@ class ReserveRepositoryTest {
         Member member2 = memberRepository.save(
                 Member.builder()
                         .name("park")
-                        .gender(Gender.FEMALE.getDescription())
+                        .gender(Gender.FEMALE)
                         .phoneNumber("010-0101-0103")
                         .build()
         );
@@ -269,7 +269,7 @@ class ReserveRepositoryTest {
         Member owner = memberRepository.save(
                 Member.builder()
                         .name("kim")
-                        .gender(Gender.MALE.getDescription())
+                        .gender(Gender.MALE)
                         .phoneNumber("010-0101-0101")
                         .build()
         );
@@ -277,7 +277,7 @@ class ReserveRepositoryTest {
         Member member = memberRepository.save(
                 Member.builder()
                         .name("lee")
-                        .gender(Gender.MALE.getDescription())
+                        .gender(Gender.MALE)
                         .phoneNumber("010-0101-0102")
                         .build()
         );
@@ -285,7 +285,7 @@ class ReserveRepositoryTest {
         Member member2 = memberRepository.save(
                 Member.builder()
                         .name("park")
-                        .gender(Gender.FEMALE.getDescription())
+                        .gender(Gender.FEMALE)
                         .phoneNumber("010-0101-0103")
                         .build()
         );
@@ -364,7 +364,7 @@ class ReserveRepositoryTest {
                         .name("kim")
                         .email("sehun5515@naver.com")
                         .password("1234")
-                        .gender(Gender.MALE.getDescription())
+                        .gender(Gender.MALE)
                         .phoneNumber("010-0101-0101")
                         .build()
         );
@@ -374,7 +374,7 @@ class ReserveRepositoryTest {
                         .name("lee")
                         .email("sehun8631@naver.com")
                         .password("1234")
-                        .gender(Gender.MALE.getDescription())
+                        .gender(Gender.MALE)
                         .phoneNumber("010-0101-0102")
                         .build()
         );
@@ -384,7 +384,7 @@ class ReserveRepositoryTest {
                         .name("park")
                         .email("sehun5216@naver.com")
                         .password("1234")
-                        .gender(Gender.FEMALE.getDescription())
+                        .gender(Gender.FEMALE)
                         .phoneNumber("010-0101-0103")
                         .build()
         );

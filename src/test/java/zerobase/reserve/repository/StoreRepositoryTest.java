@@ -30,7 +30,7 @@ class StoreRepositoryTest {
         Member member = memberRepository.save(
                 Member.builder()
                         .name("kim")
-                        .gender(Gender.MALE.getDescription())
+                        .gender(Gender.MALE)
                         .phoneNumber("010-0101-0101")
                         .build()
         );
@@ -59,7 +59,7 @@ class StoreRepositoryTest {
         Member member = memberRepository.save(
                 Member.builder()
                         .name("kim")
-                        .gender(Gender.MALE.getDescription())
+                        .gender(Gender.MALE)
                         .phoneNumber("010-0101-0101")
                         .build()
         );
@@ -67,7 +67,7 @@ class StoreRepositoryTest {
         Member member2 = memberRepository.save(
                 Member.builder()
                         .name("park")
-                        .gender(Gender.MALE.getDescription())
+                        .gender(Gender.MALE)
                         .phoneNumber("010-0101-0102")
                         .build()
         );
@@ -120,7 +120,7 @@ class StoreRepositoryTest {
         Member member = memberRepository.save(
                 Member.builder()
                         .name("kim")
-                        .gender(Gender.MALE.getDescription())
+                        .gender(Gender.MALE)
                         .phoneNumber("010-0101-0101")
                         .build()
         );
@@ -128,7 +128,7 @@ class StoreRepositoryTest {
         Member member2 = memberRepository.save(
                 Member.builder()
                         .name("park")
-                        .gender(Gender.MALE.getDescription())
+                        .gender(Gender.MALE)
                         .phoneNumber("010-0101-0102")
                         .build()
         );

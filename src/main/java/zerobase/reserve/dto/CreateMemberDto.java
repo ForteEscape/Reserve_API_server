@@ -1,6 +1,7 @@
 package zerobase.reserve.dto;
 
 import lombok.*;
+import zerobase.reserve.domain.Gender;
 import zerobase.reserve.domain.Member;
 
 import java.util.List;
@@ -30,11 +31,19 @@ public class CreateMemberDto {
         private String gender;
 
         public Member createMember(List<String> roles){
+            Gender genderData;
+
+            if (this.gender.equals("Female")){
+                genderData = Gender.FEMALE;
+            } else{
+                genderData = Gender.MALE;
+            }
+
             return Member.builder()
                     .name(this.name)
                     .password(this.password)
                     .email(this.email)
-                    .gender(this.gender)
+                    .gender(genderData)
                     .phoneNumber(this.phoneNumber)
                     .roles(roles)
                     .build();

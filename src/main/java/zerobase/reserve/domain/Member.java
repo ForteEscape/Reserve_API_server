@@ -37,7 +37,8 @@ public class Member implements UserDetails {
     private String phoneNumber;
 
     @Column(length = 10)
-    private String gender;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles;
@@ -49,7 +50,7 @@ public class Member implements UserDetails {
     private LocalDateTime lastModifiedDate;
 
     @Builder
-    public Member(Long id, String name, String phoneNumber, String gender, String email, String password, List<String> roles) {
+    public Member(Long id, String name, String phoneNumber, Gender gender, String email, String password, List<String> roles) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;

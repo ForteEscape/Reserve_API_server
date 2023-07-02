@@ -1,6 +1,7 @@
 package zerobase.reserve.dto;
 
 import lombok.*;
+import zerobase.reserve.domain.Gender;
 import zerobase.reserve.domain.Member;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class MemberDto {
     private String password;
     private String name;
     private String phoneNumber;
-    private String gender;
+    private Gender gender;
 
     private List<String> roles;
 

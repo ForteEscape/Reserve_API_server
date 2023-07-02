@@ -31,7 +31,7 @@ class MemberRepositoryTest {
                         .name("kim")
                         .email("sehun5515@naver.com")
                         .password("1234")
-                        .gender(Gender.MALE.getDescription())
+                        .gender(Gender.MALE)
                         .phoneNumber("010-0101-0101")
                         .build()
         );
@@ -56,7 +56,7 @@ class MemberRepositoryTest {
                         .name("kim")
                         .email("sehun5515@naver.com")
                         .password("1234")
-                        .gender(Gender.MALE.getDescription())
+                        .gender(Gender.MALE)
                         .phoneNumber("010-0101-0101")
                         .build()
         );
@@ -66,7 +66,7 @@ class MemberRepositoryTest {
                         .name("park")
                         .email("sehun8631@naver.com")
                         .password("1234")
-                        .gender(Gender.MALE.getDescription())
+                        .gender(Gender.MALE)
                         .phoneNumber("010-0101-0102")
                         .build()
         );
@@ -76,7 +76,7 @@ class MemberRepositoryTest {
                         .name("lee")
                         .email("sehun5216@naver.com")
                         .password("1234")
-                        .gender(Gender.FEMALE.getDescription())
+                        .gender(Gender.FEMALE)
                         .phoneNumber("010-0101-0103")
                         .build()
         );
