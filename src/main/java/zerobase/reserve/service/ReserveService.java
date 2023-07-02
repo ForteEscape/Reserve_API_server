@@ -189,7 +189,7 @@ public class ReserveService {
      * @param userEmail 예약한 회원의 Email
      * @return 도착 완료된 예약의 정보 DTO
      */
-    @Transactional
+    @Transactional(noRollbackFor = InvalidReserveException.class)
     public ReserveDto arriveCheck(Long reserveId, String userEmail){
         Reserve reserve = reserveRepository.findById(reserveId)
                 .orElseThrow(() -> new NotExistsException(ErrorCode.RESERVE_NOT_EXISTS));
