@@ -69,18 +69,22 @@ public class ReviewService {
         );
     }
 
+    // 다른 회원의 예약을 조회하는지 검증
     private static boolean checkIllegalAccess(String memberEmail, String reserveEmail) {
         return !reserveEmail.equals(memberEmail);
     }
 
+    // 이미 리뷰된 예약인지 검증
     private static boolean checkReserveAlreadyReviewed(ReserveStatus reserveStatus) {
         return reserveStatus == ReserveStatus.REVIEWED;
     }
 
+    // 리뷰 가능 기간이 지났는지 검증
     private static boolean checkReserveDateTime(LocalDateTime reserveTime) {
         return !LocalDateTime.now().isBefore(reserveTime.plusDays(7));
     }
 
+    // 해당 예약이 리뷰 가능한 상태인지 검증
     private static boolean checkReserveNotComplete(ReserveStatus reserveStatus) {
         return reserveStatus != ReserveStatus.COMPLETE;
     }

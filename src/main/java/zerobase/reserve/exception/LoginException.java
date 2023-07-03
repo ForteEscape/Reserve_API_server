@@ -2,6 +2,9 @@ package zerobase.reserve.exception;
 
 import lombok.*;
 
+/**
+ * 로그인 실패 시 발생하는 예외
+ */
 @Getter
 @Setter
 @AllArgsConstructor

@@ -30,10 +30,10 @@ public class TokenProvider {
     private String secretKey;
 
     /**
-     * jwt token provider
-     * @param username
-     * @param roles
-     * @return
+     * jwt token 생성
+     * @param username 유저 식별자
+     * @param roles 해당 유저가 가진 권한
+     * @return 위 입력에 대해 연산되어 나온 JWT 토큰
      */
     public String generateToken(String username, List<String> roles){
         Claims claims = Jwts.claims().setSubject(username);
@@ -57,12 +57,14 @@ public class TokenProvider {
     public Authentication getAuthentication(String jwt){
         UserDetails userDetails = memberService.loadUserByUsername(getUserName(jwt));
 
-        log.info("username = {}, password = {}", userDetails.getUsername(), userDetails.getPassword());
-        log.info("authorities = {}", userDetails.getAuthorities().toString());
-
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
+    /**
+     * 토큰 유효성 검증
+     * @param token 검증받을 토큰
+     * @return 토큰이 유효한 경우 True, 그렇지 않을 경우 False
+     */
     public boolean validateToken(String token){
         if (!StringUtils.hasText(token)) return false;
 

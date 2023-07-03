@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * JWT 인증 필터
+ */
 @Slf4j
 @Component
 @RequiredArgsConstructor
@@ -25,15 +28,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     public static final String TOKEN_PREFIX = "Bearer ";
     private final TokenProvider tokenProvider;
 
+    /**
+     * 모든 요청에 대해 우선적으로 필터를 거쳐 들어가 해당 메서드를 통과한다.
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = resolveTokenFromRequest(request);
 
-        log.info("called filter");
-
         if (StringUtils.hasText(token) && tokenProvider.validateToken(token)){
-            log.info("success token: {}", token);
-
             Authentication auth = tokenProvider.getAuthentication(token);
             SecurityContextHolder.getContext().setAuthentication(auth);
         }
@@ -41,14 +43,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
+    /**
+     * 들어온 토큰이 JWT 타입 토큰인지 검증
+     * @param request 들어온 요청
+     * @return 순수 토큰 문자열
+     */
     private String resolveTokenFromRequest(HttpServletRequest request){
         String token = request.getHeader(TOKEN_HEADER);
 
-        log.info("token = {}", token);
-
         if (!ObjectUtils.isEmpty(token) && token.startsWith(TOKEN_PREFIX)){
-            log.info("token validation complete token : {}", token.substring(TOKEN_PREFIX.length()));
-
             return token.substring(TOKEN_PREFIX.length());
         }
 

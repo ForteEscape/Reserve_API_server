@@ -25,6 +25,13 @@ public class StoreService {
     private final MemberRepository memberRepository;
 
     // 입력받은 매점 정보를 DB에 저장
+
+    /**
+     * 입력으로 들어온 매장 정보를 DB에 저장
+     * @param storeInfo 저장할 매장 정보 DTO
+     * @param ownerEmail 해당 매장의 주인 - 로그인을 통해 나온 JWT 로 얻을 수 있다.
+     * @return 저장된 매장 정보 DTO
+     */
     @Transactional
     public CreateStoreDto.Response createStore(CreateStoreDto.Request storeInfo, String ownerEmail){
         validateStoreName(storeInfo);
@@ -41,7 +48,12 @@ public class StoreService {
         );
     }
 
-    //spring security 를 사용하여 로그인한 사용자 정보에서 id를 토대로 사용자 정보 가져오기
+
+    /**
+     * 파트너 이메일을 통해 파트너 엔티티 가져오기
+     * @param ownerEmail 찾을 파트너 이메일
+     * @return 파트너 엔티티
+     */
     private Member getOwnerFromEmail(String ownerEmail) {
         Optional<Member> owner = memberRepository.findByEmail(ownerEmail);
 
