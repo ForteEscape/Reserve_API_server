@@ -50,7 +50,7 @@ public class ReviewRepository {
      * @return 회원이 등록한 리뷰 리스트
      */
     public List<Review> findByUserEmail(String userEmail){
-        return em.createQuery("select r from Review r join Member m on m.email = :userEmail", Review.class)
+        return em.createQuery("select r from Review r join r.member m on m.email = :userEmail", Review.class)
                 .setParameter("userEmail", userEmail)
                 .getResultList();
     }
