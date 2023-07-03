@@ -6,6 +6,9 @@ import zerobase.reserve.domain.Member;
 
 import java.util.List;
 
+/**
+ * 회원 정보 반환 DTO
+ */
 @Getter
 @Setter
 @NoArgsConstructor

@@ -8,6 +8,11 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+/**
+ * 후기 생성 DTO 모음
+ * Request - 매장 후기 요청을 받기 위한 DTO
+ * Response - 생성된 후기를 json 으로 반환할 DTO
+ */
 public class CreateReviewDto {
 
     @Getter

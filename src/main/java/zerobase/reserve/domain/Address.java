@@ -11,14 +11,6 @@ import javax.persistence.Embeddable;
 @ToString
 public class Address {
 
-    @Builder
-    public Address(String legion, String city, String street, String zipcode) {
-        this.legion = legion;
-        this.city = city;
-        this.street = street;
-        this.zipcode = zipcode;
-    }
-
     @Column(length = 30)
     private String legion;
 
@@ -30,4 +22,12 @@ public class Address {
 
     @Column(length = 30)
     private String zipcode;
+
+    @Builder
+    public Address(String legion, String city, String street, String zipcode) {
+        this.legion = legion;
+        this.city = city;
+        this.street = street;
+        this.zipcode = zipcode;
+    }
 }

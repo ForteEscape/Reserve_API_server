@@ -6,6 +6,11 @@ import zerobase.reserve.domain.Store;
 import javax.validation.constraints.NotEmpty;
 
 
+/**
+ * 매장생성 DTO 모음
+ * Request - 매장생성 요청을 받기 위한 DTO
+ * Response - 생성된 매장을 json 으로 반환할 DTO
+ */
 public class CreateStoreDto {
 
     @Getter

@@ -16,6 +16,11 @@ public class StoreRepository {
 
     private final EntityManager em;
 
+    /**
+     * 매장 엔티티 저장
+     * @param store 저장할 매장 엔티티
+     * @return 저장된 매장 엔티티
+     */
     public Store save(Store store){
         em.persist(store);
 
@@ -33,6 +38,11 @@ public class StoreRepository {
                 .getResultList();
     }
 
+    /**
+     * 매장 이름으로 매장 엔티티 조회
+     * @param storeName 조회할 매장의 이름
+     * @return 해당 매장의 엔티티
+     */
     public Optional<Store> findByStoreName(String storeName){
         List<Store> findByStoreName = em.createQuery("select s from Store s where s.storeName = :storeName", Store.class)
                 .setParameter("storeName", storeName)

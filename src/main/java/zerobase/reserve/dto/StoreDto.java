@@ -3,6 +3,9 @@ package zerobase.reserve.dto;
 import lombok.*;
 import zerobase.reserve.domain.Store;
 
+/**
+ * 매장 정보 DTO
+ */
 @Getter
 @Setter
 @NoArgsConstructor

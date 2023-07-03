@@ -6,6 +6,9 @@ import zerobase.reserve.domain.ReserveStatus;
 
 import java.time.LocalDateTime;
 
+/**
+ * 예약 정보 DTO
+ */
 @Getter
 @Setter
 @AllArgsConstructor

@@ -7,6 +7,12 @@ import zerobase.reserve.domain.ReserveStatus;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
+/**
+ * 예약 생성 DTO 모음
+ * Request - 예약 생성 요청을 받기 위한 DTO
+ * Response - 생성된 예약을 json 으로 반환할 DTO
+ * StoreRequest - 매장 상세 정보에서 예약 수행 시 요청을 받는 DTO
+ */
 public class CreateReserveDto {
 
     @Getter
