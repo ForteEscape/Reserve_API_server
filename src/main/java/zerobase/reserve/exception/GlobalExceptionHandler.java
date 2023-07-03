@@ -61,6 +61,16 @@ public class GlobalExceptionHandler {
                 .build();
     }
 
+    @ExceptionHandler(InvalidReviewException.class)
+    public ErrorResponseDto handleInvalidReviewException(InvalidReviewException e){
+        log.error("error occurred error message = {}", e.getErrorMessage());
+
+        return ErrorResponseDto.builder()
+                .errorCode(e.getErrorCode())
+                .errorMessage(e.getErrorMessage())
+                .build();
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ErrorResponseDto handleMethodArgumentNotValidException(MethodArgumentNotValidException e){
         log.error("validate error occurred");
