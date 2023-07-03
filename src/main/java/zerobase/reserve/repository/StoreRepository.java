@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import zerobase.reserve.domain.Store;
+import zerobase.reserve.dto.StoreSearchCond;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -33,8 +34,22 @@ public class StoreRepository {
         return Optional.ofNullable(store);
     }
 
-    public List<Store> findAll(){
-        return em.createQuery("select s from Store s", Store.class)
+    public List<Store> findAll(StoreSearchCond cond){
+        String jpql = "select s from Store s";
+        boolean isCondHasKeyword = false;
+
+        if (cond.getKeyword() != null && !cond.getKeyword().equals("")){
+            isCondHasKeyword = true;
+            jpql += " where s.storeName like :cond";
+        }
+
+        if (isCondHasKeyword){
+            return em.createQuery(jpql, Store.class)
+                    .setParameter("cond", "%" + cond.getKeyword() + "%")
+                    .getResultList();
+        }
+
+        return em.createQuery(jpql, Store.class)
                 .getResultList();
     }
 

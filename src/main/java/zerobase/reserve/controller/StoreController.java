@@ -5,10 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import zerobase.reserve.domain.Store;
-import zerobase.reserve.dto.CreateReserveDto;
-import zerobase.reserve.dto.CreateReviewDto;
-import zerobase.reserve.dto.CreateStoreDto;
-import zerobase.reserve.dto.StoreDto;
+import zerobase.reserve.dto.*;
 import zerobase.reserve.exception.ErrorCode;
 import zerobase.reserve.exception.NotExistsException;
 import zerobase.reserve.repository.ReviewRepository;
@@ -33,8 +30,8 @@ public class StoreController {
     private final ReviewRepository reviewRepository;
 
     @GetMapping
-    public List<StoreDto> getStoreList(){
-        return storeRepository.findAll().stream()
+    public List<StoreDto> getStoreList(@RequestBody StoreSearchCond cond){
+        return storeRepository.findAll(cond).stream()
                 .map(StoreDto::fromEntity)
                 .collect(Collectors.toList());
     }
