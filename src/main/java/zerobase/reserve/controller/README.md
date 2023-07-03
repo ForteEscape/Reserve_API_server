@@ -64,6 +64,27 @@
     - `DuplicateException` - 중복된 email 이 감지될 때 발생합니다.
     - `MethodArgumentNotVaildException` - 입력값에 대한 검증이 실패하였을 때 발생합니다.
 
+
+### 로그인 API
+- URL: /members/signin
+- 입력 명세
+```json
+{
+  "email": "email",
+  "password": "password"
+}
+```
+- 결과 명세
+```text
+JWT token
+```
+
+- 결과로는 JWT 토큰이 반환되며 회원 가입이 필요한 곳에서 해당 JWT 토큰을 HTTP Header의 Authority에 `Bearer JWT_token`의 형식으로 넣어주셔야 합니다.
+
+- 발생 가능한 예외
+  - `LoginException` - 패스워드 불일치의 경우 발생합니다.
+  - `NotExistsException` - 입력받은 `email`이 DB에 존재하지 않을 경우 발생합니다.
+
 ## 2. 매장 관련 API
 ### 매장 리스트 조회 API
 - URL: /stores, GET
