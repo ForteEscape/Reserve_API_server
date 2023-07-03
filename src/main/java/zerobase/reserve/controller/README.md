@@ -29,6 +29,9 @@
 }
 ```
 - 비밀번호는 암호화되어 DB에 저장됩니다.
+- 발생 가능한 예외
+  - `DuplicateException` - 중복된 email 이 감지될 때 발생합니다.
+  - `MethodArgumentNotVaildException` - 입력값에 대한 검증이 실패하였을 때 발생합니다.
 
 ### 일반 회원 가입 API
 - URL: /members/user/signup, POST
@@ -57,6 +60,9 @@
     ]
 }
 ```
+- 발생 가능한 예외
+    - `DuplicateException` - 중복된 email 이 감지될 때 발생합니다.
+    - `MethodArgumentNotVaildException` - 입력값에 대한 검증이 실패하였을 때 발생합니다.
 
 ## 2. 매장 관련 API
 ### 매장 리스트 조회 API
@@ -67,9 +73,10 @@
   "keyword": "keyword (optional)"
 }
 ```
-- `keyword` 속성은 비어있는체로 제공되어도 좋습니다. 해당 속성이 비어있는 경우, 현재 등록되어 있는 모든 매장을 반환합니다.
-- `keyword` 에 데이터가 들어가는 경우, 해당 키워드를 사용하여 키워드가 존재하는 매장 데이터를 반환합니다.
-- 결과 명세(`keyword = """`)
+- `keyword` 속성은 비어있는체로 제공되어도 좋습니다. 단 입력 명세를 아예 넣지 않으면 안됩니다.
+  - `keyword` 속성이 비어있는 경우, 현재 등록되어 있는 모든 매장을 반환합니다.
+  - `keyword` 에 데이터가 들어가는 경우, 해당 키워드를 사용하여 키워드가 존재하는 매장 데이터를 반환합니다.
+- 결과 명세(`keyword = ""`)
 ```json
 [
     {
@@ -109,6 +116,9 @@
 }
 ```
 
+- 발생할 수 있는 예외
+  - `NotExistsException` - 상세 조회할 매장이 존재하지 않을 때 발생합니다.
+
 
 ### 매장 등록 API
 - URL: /stores/new
@@ -139,6 +149,10 @@
 }
 ```
 
+- 발생 가능한 예외
+  - `DuplicateException` - 동일한 매장 이름이 이미 존재할 때 발생합니다.
+  - `MethodArgumentNotVaildException` - 입력에 대한 검증이 실패하였을 때 발생합니다.
+
 ## 3. 예약 관련 API
 ### 예약 생성 API - (1)
 - 예약 생성은 두 가지 방식으로 가능합니다.
@@ -164,6 +178,11 @@
     "storeName": "store1"
 }
 ```
+
+- 발생 가능한 예외
+  - `NotExistsException` - 예약을 진행하려는 매장이 존재하지 않을 때 발생합니다.
+
+
 ### 예약 생성 API - (2)
 - 예약을 생성하는 다른 방법은 매장의 상세 정보에서 예약을 추가하는 것입니다.
 - URL : /stores/{storeId}/add-reserve
@@ -219,6 +238,9 @@
 }
 ```
 
+- 발생할 수 있는 예외
+  - `NotExistsException` - 단건 조회에서 존재하지 않는 예약을 조회하려고 할 때 발생합니다.
+
 ### 점장측에서 예약 취소 API
 - URL: /reserves/owner/{reserveId}/cancel
 - 입력 명세는 없습니다.
@@ -232,6 +254,10 @@
   "storeName": "store1"
 }
 ```
+
+- 발생할 수 있는 예외
+    - `NotExistsException` - 존재하지 않는 예약을 취소하려고 할 때 발생합니다.
+    - `NotMatchException` - 다른 점장에게 들어온 예약을 취소시키려고 할 때 발생합니다.
 
 ### 회원이 등록한 예약 조회
 - URL: /reserves/user
@@ -267,6 +293,9 @@
 }
 ```
 
+- 발생할 수 있는 예외
+    - `NotExistsException` - 단건 조회에서 존재하지 않는 예약을 조회하려고 할 때 발생합니다.
+
 ### 회원측에서 예약 취소 API
 - URL: /reserves/user/{reserveId}/cancel
 - 입력 명세는 없습니다.
@@ -281,6 +310,10 @@
 }
 ```
 
+- 발생할 수 있는 예외
+    - `NotExistsException` - 존재하지 않는 예약을 취소하려고 할 때 발생합니다.
+    - `NotMatchException` - 다른 회원이 수행한 예약을 취소시키려고 할 때 발생합니다.
+
 ### 예약 방문 처리 API
 - URL: /reserves/user/{reserveId}/checkin
 - 입력 명세는 없습니다.
@@ -294,6 +327,11 @@
   "storeName": "store1"
 }
 ```
+
+- 발생할 수 있는 예외
+  - `NotMatchException` - 다른 회원이 예약한 것을 방문 처리하려고 할 때 발생합니다.
+  - `InvalidReserveException` - 취소된 예약을 방문 처리하려고 할 때 발생합니다.
+  - `InvalidReserveException` - 예약시간 10분 이전에 도착하지 못했을 때 발생합니다.
 
 ## 리뷰 관련 API
 ### 리뷰 생성 API
@@ -314,6 +352,12 @@
   "reviewContent": "요리가 매우 훌륭했습니다."
 }
 ```
+
+- 발생 가능한 예외
+    - `NotMatchException` - 다른 회원의 예약에 대해 리뷰하려고 할 때 발생합니다.
+    - `InvalidReviewException` - 이미 리뷰한 예약에 대해 다시 리뷰하려고 할 때 발생합니다.
+    - `NotMatchException` - 방문 처리가 되지 않은 예약에 대해 리뷰하려고 할 때 발생합니다.
+    - `InvalidReviewException` - 방문한 지 7일이 초과한 시점에서 리뷰하려고 할 때 발생합니다.
 
 ### 회원이 생성한 리뷰 조회 API
 - URL: /reviews/user
